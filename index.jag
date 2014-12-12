@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <title>MaxK Values</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.noisy.min.js"></script>
+
+
+    
+<script type="text/javascript">
+function loadXMLDoc()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    document.getElementById("wrapper").innerHTML=xmlhttp.responseText;
+	    }
+	}
+	xmlhttp.open("GET","retrievedata.jag",true);
+	xmlhttp.send();
+}
+
+function loadXMLDocScheduled()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    document.getElementById("wrapper").innerHTML=xmlhttp.responseText;
+	    }
+	}
+	xmlhttp.open("GET","retrievedata.jag",true);
+	xmlhttp.send();
+	var e = document.getElementById("searchtxt");
+	var selectedval = e.options[e.selectedIndex].value;
+	setTimeout(loadXMLDocScheduled, selectedval*60000);
+}
+
+function getAverageData()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    document.getElementById("avg").innerHTML=xmlhttp.responseText;
+	    }
+	}
+	xmlhttp.open("GET","retrieveavg.jag",true);
+	xmlhttp.send();
+}
+
+function getAverageDataScheduled()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    document.getElementById("avg").innerHTML=xmlhttp.responseText;
+	    }
+	}
+	xmlhttp.open("GET","retrieveavg.jag",true);
+	xmlhttp.send();
+	var e2 = document.getElementById("searchtxt2");
+	var selectedval2 = e2.options[e2.selectedIndex].value;
+	setTimeout(getAverageDataScheduled, selectedval2*60000);
+}
+
+</script>
+</head>
+<body>
+    <!-- <div class="logo"><img src="images/logo.png" alt=""  /></div> -->
+    <div class="logo" style="font-size:55px;">
+        <h1 >Top 10 pressure readings</h1><br/>
+    </div>
+    <div class="btnclass">
+	    <form action="javascript:loadXMLDoc(document.searchbar.searchtxt.value);" id="searchbar" name="searchbar">
+	      <ul>
+		<li ><a onclick="loadXMLDoc()" id="searchbtn2" class="awesome large green">Refresh Now</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<li><a onclick="loadXMLDocScheduled()" id="searchbtn" class="awesome large green">Refresh after</a></li>
+		<li>
+		<select id="searchtxt" name="searchtxt">
+		  <option value="5">5</option>
+		  <option value="15">15</option>
+		  <option value="30">30</option>
+		  <option value="60">60</option>
+		</select>
+		</li> <span style="font-size:18px;">minutes</span>
+	      </ul>
+	    </form>
+    <div>
+    <div id="myDiv">
+     <div id="wrapper">      
+     </div>
+    </div>
+
+    <div class="logo2" style="font-size:55px;">
+        <h1 >Average pressure</h1><br/>
+    </div>
+    <div id="avg">
+	<span id="avgdata"></span>    
+    </div>
+
+    <div class="btnclass">
+	    <form action="javascript:loadXMLDoc(document.searchbar.searchtxt.value);" id="searchbar" name="searchbar">
+	      <ul>
+		<li ><a onclick="getAverageData()" id="searchbtn3" class="awesome large green">Refresh Now</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<li><a onclick="getAverageDataScheduled()" id="searchbtn4" class="awesome large green">Refresh after</a></li>
+		<li>
+		<select id="searchtxt2" name="searchtxt2">
+		  <option value="5">5</option>
+		  <option value="15">15</option>
+		  <option value="30">30</option>
+		  <option value="60">60</option>
+		</select>
+		</li> <span style="font-size:18px;">minutes</span>
+	      </ul>
+	    </form>
+    <div>
+    
+<footer>
+	<div class="shadowmaker"></div>
+</footer>
+
+<script type="text/javascript">
+    $('body').noisy({
+    'intensity' : 1,
+    'size' : '300',
+    'opacity' : 0.127,
+    'fallback' : '',
+    'monochrome' : false
+}).css('background-color', '#006680');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <title>Average Value</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.noisy.min.js"></script>
+</head>
+
+<!-- Display average-->
+<%
+var db = new Database("jdbc:mysql://localhost:3306/cepdatasource" , "root", "root");
+
+var q1= "SELECT * FROM bamavgvalues order by timestamp desc limit 1;";
+var q2= "SELECT a.avg,a.timestamp FROM avgvalues as a, bamavgvalues as b WHERE b.timestamp<=a.timestamp;";
+var q3= "SELECT COUNT(a.avg) as count FROM avgvalues as a, bamavgvalues as b WHERE b.timestamp<=a.timestamp;";
+
+var bamavg=db.query(q1);
+var cepavgs=db.query(q2);
+var rowcount=db.query(q3);
+<!--print("BAM timestamp: "+bamavg[0].timestamp+ "<br/>");-->
+
+
+var sum=0;
+var count=rowcount[0].count;
+for(var i = 0; i < count; i++) {
+	<!-- print(cepavgs[i].avg+" | " + cepavgs[i].timestamp+"<br/>"); -->
+	sum+=cepavgs[i].avg;
+}
+
+<!--print("COUNT: "+count+"<br/>");-->
+
+var finalavg= (sum+bamavg[0].avg)/(Number(count)+1);
+print(finalavg);
+%>
+</html>
