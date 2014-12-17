@@ -13,8 +13,12 @@
 <!-- Display max K-->
 
 <%
+
+<!--connecting to databases-->
 var db1 = new Database("jdbc:mysql://10.100.5.152:3306/BAMTopTen" , "dinithi", "dinithi");
 var db2 = new Database("jdbc:mysql://10.100.5.185:3306/PressureSensorsDb" , "reguser", "reguser");
+
+<!--row count for toptenCEP table-->
 var q1= "SELECT COUNT(*) as count1 FROM topTenCEP;"; 
 var getcount = db1.query(q1);
 
@@ -25,18 +29,18 @@ if(getcount[0].count1 <= 10){
 	rowcount=10;
 }
 
-//var q1= "SELECT a.value,date FROM BAMTopTen.topTenCEP as a UNION SELECT b.value,day as date FROM PressureSensorsDb.toppressuresensorsview as b ORDER BY value DESC LIMIT 10;"; 
-//var getCEPTopten = db2.query(q1);
-
-var q2= "SELECT value,date FROM BAMTopTen.topTenCEP ORDER BY value DESC LIMIT 10;";
+<!-- topten for cep table-->
+var q2= "SELECT value,date FROM BAMTopTen.topTenCEP ORDER BY value DESC LIMIT 20;";
 var getCEPTopten = db1.query(q2);
 
-var q3= "SELECT value,day as date FROM PressureSensorsDb.toppressuresensorsview ORDER BY value DESC LIMIT 10;"; 
+<!-- topten for bam table-->
+var q3= "SELECT value,day as date FROM PressureSensorsDb.toppressuresensorsview ORDER BY value DESC;"; 
 var getBAMTopten = db2.query(q3);
 
+<!-- combine results-->
 var finalObj = getCEPTopten.concat(getBAMTopten);
-//print(finalObj);
 
+<!-- sort results to get topten-->
 finalObj.sort(function(a,b) {
 return (a.value > b.value) ? -1 : ((b.value > a.value) ? 1 : 0);
 });
@@ -46,7 +50,7 @@ var finalst=st.replace(/day/g,"date");
 
 var finalres=parse(finalst);
 
-print("<table id='keywords'><tr style='font-size:20px;' height='35px' valign='middle'><th>Rank</th><th>Value</th><th>Date</th></tr>");
+print("<table id='keywords' style='border: 1px solid black;'><tr style='font-size:20px;' height='35px' valign='middle'><th>Rank</th><th>Value</th><th>Date</th></tr>");
 
 for(var i = 0; i < 10; i++) {
        

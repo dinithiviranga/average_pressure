@@ -121,15 +121,15 @@ function getAverageDataScheduled()
 		<li><a onclick="loadXMLDocScheduled()" id="searchbtn" class="awesome large green">Refresh after</a></li>
 		<li>
 		<select id="searchtxt" name="searchtxt">
+		  <option value="1">1</option>
 		  <option value="5">5</option>
 		  <option value="15">15</option>
 		  <option value="30">30</option>
-		  <option value="60">60</option>
 		</select>
 		</li> <span style="font-size:18px;">minutes</span>
 	      </ul>
 	    </form>
-    <div>
+    </div>
     <div id="myDiv">
      <div id="wrapper">      
      </div>
@@ -139,29 +139,25 @@ function getAverageDataScheduled()
         <h1 >Average pressure</h1><br/>
     </div>
     <div id="avg">
-	<span id="avgdata"></span>    
+	   
     </div>
 
     <div class="btnclass">
-	    <form action="javascript:loadXMLDoc(document.searchbar.searchtxt.value);" id="searchbar" name="searchbar">
-	      <ul>
-		<li ><a onclick="getAverageData()" id="searchbtn3" class="awesome large green">Refresh Now</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<li><a onclick="getAverageDataScheduled()" id="searchbtn4" class="awesome large green">Refresh after</a></li>
-		<li>
-		<select id="searchtxt2" name="searchtxt2">
-		  <option value="5">5</option>
-		  <option value="15">15</option>
-		  <option value="30">30</option>
-		  <option value="60">60</option>
-		</select>
-		</li> <span style="font-size:18px;">minutes</span>
-	      </ul>
-	    </form>
-    <div>
-    
-<footer>
-	<div class="shadowmaker"></div>
-</footer>
+    <form action="javascript:loadXMLDoc(document.searchbar.searchtxt.value);" id="searchbar" name="searchbar">
+      <ul>
+	<li ><a onclick="getAverageData()" id="searchbtn3" class="awesome large green">Refresh Now</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<li><a onclick="getAverageDataScheduled()" id="searchbtn4" class="awesome large green">Refresh after</a></li>
+	<li>
+	<select id="searchtxt2" name="searchtxt2">
+	  <option value="1">1</option>
+	  <option value="5">5</option>
+	  <option value="15">15</option>
+	  <option value="30">30</option>
+	</select>
+	</li> <span style="font-size:18px;">minutes</span>
+      </ul>
+    </form>
+    </div>
 
 <script type="text/javascript">
     $('body').noisy({

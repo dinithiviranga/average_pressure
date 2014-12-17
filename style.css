@@ -326,14 +326,13 @@ h1 {
     text-align: center;
 }
 
-
 /** page structure **/
 #wrapper {
     display: block;
     width: 1000px;
     margin: 0 auto;
     padding: 10px 17px;
-    font-size:12px;
+    font-size:10px;
     -webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.35);
 }
 
@@ -361,7 +360,7 @@ h1 {
 #keywords thead tr th {
     font-weight: bold;
     padding: 12px 30px;
-    padding-left: 42px;
+    padding-left: 42px;  
 }
 #keywords thead tr th span {
     padding-right: 20px;
