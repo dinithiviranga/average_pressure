@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <title>MaxK Value</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.noisy.min.js"></script>
+</head>
+
+
+<!-- Display max K-->
+
+<%
+
+<!--connecting to databases-->
+var db1 = new Database("jdbc:mysql://10.100.5.152:3306/BAMTopTen" , "dinithi", "dinithi");
+var db2 = new Database("jdbc:mysql://10.100.5.185:3306/PressureSensorsDb" , "reguser", "reguser");
+
+<!--row count for toptenCEP table-->
+var q1= "SELECT COUNT(*) as count1 FROM topTenCEP;"; 
+var getcount = db1.query(q1);
+
+var rowcount;
+if(getcount[0].count1 <= 10){
+	rowcount=getcount[0].count1;
+} else{
+	rowcount=10;
+}
+
+<!-- topten for cep table-->
+var q2= "SELECT value,date FROM BAMTopTen.topTenCEP ORDER BY value DESC LIMIT 20;";
+var getCEPTopten = db1.query(q2);
+
+<!-- topten for bam table-->
+var q3= "SELECT value,day as date FROM PressureSensorsDb.toppressuresensorsview ORDER BY value DESC;"; 
+var getBAMTopten = db2.query(q3);
+
+<!-- combine results-->
+var finalObj = getCEPTopten.concat(getBAMTopten);
+
+<!-- sort results to get topten-->
+finalObj.sort(function(a,b) {
+return (a.value > b.value) ? -1 : ((b.value > a.value) ? 1 : 0);
+});
+
+var st=stringify(finalObj);
+var finalst=st.replace(/day/g,"date");
+
+var finalres=parse(finalst);
+
+print("<table id='keywords' style='border: 1px solid black;'><tr style='font-size:20px;' height='35px' valign='middle'><th>Rank</th><th>Value</th><th>Date</th></tr>");
+
+for(var i = 0; i < 10; i++) {
+       
+	var val=finalres[i].date;
+	var date = new Date(Number(val));
+	
+	var formattedTime= date.toString("MMM dd");
+	print("<tr><td width='10%'>"+(i+1)+"</td><td width='30%'>"+finalres[i].value+"</td width='60%'><td>"+formattedTime+"</td></tr>");
+}
+print("</table>");
+
+
+%>
+</html>

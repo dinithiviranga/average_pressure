@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>MaxK Values</title>
+    <title>Pressure Values</title>
     <link href="style.css" rel="stylesheet" />
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.noisy.min.js"></script>
@@ -31,7 +31,7 @@ function loadXMLDoc()
 	    document.getElementById("wrapper").innerHTML=xmlhttp.responseText;
 	    }
 	}
-	xmlhttp.open("GET","retrievedata.jag",true);
+	xmlhttp.open("GET","retrievemax.jag",true);
 	xmlhttp.send();
 }
 
@@ -53,7 +53,7 @@ function loadXMLDocScheduled()
 	    document.getElementById("wrapper").innerHTML=xmlhttp.responseText;
 	    }
 	}
-	xmlhttp.open("GET","retrievedata.jag",true);
+	xmlhttp.open("GET","retrievemax.jag",true);
 	xmlhttp.send();
 	var e = document.getElementById("searchtxt");
 	var selectedval = e.options[e.selectedIndex].value;
@@ -112,7 +112,7 @@ function getAverageDataScheduled()
 <body>
     <!-- <div class="logo"><img src="images/logo.png" alt=""  /></div> -->
     <div class="logo" style="font-size:55px;">
-        <h1 >Top 10 pressure readings</h1><br/>
+        <h1 >Max-K pressure readings</h1><br/>
     </div>
     <div class="btnclass">
 	    <form action="javascript:loadXMLDoc(document.searchbar.searchtxt.value);" id="searchbar" name="searchbar">

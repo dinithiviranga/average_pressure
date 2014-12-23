@@ -24,7 +24,7 @@ var bamAvgs = db2.query(q4);
 var q5 = "SELECT COUNT(*) as count2 FROM pressureSensorAvg";
 var bamRowCount = db2.query(q5);
 
-print("<table width='90%'><tr><td>BAM average table</br></br></td><td>CEP average table</br></br></td></tr><tr><td width='50%'><table style='font-size:16px; border: thin solid'><tr style='font-size:20px;' height='35px' valign='middle'><th>Average</th><th>Timestamp</th></tr>");
+print("<table width='90%'><tr><td>BAM average table</br></br></td><td>CEP average table</br></br></td></tr><tr><td width='50%'><table style='font-size:16px; border: thin solid; margin-left:-90px;'><tr style='font-size:20px;' height='35px' valign='middle'><th>Timestamp</th><th>Count</th><th>Average</th></tr>");
 
 var bamavg;
 var bamtimestamp;
@@ -37,14 +37,11 @@ for(var i = 0; i < bamRowCount[0].count2; i++) {
 	bamtimestamp=bamAvgs[i].updated_time;
 	bamcount=bamAvgs[i].total_pressure_count;
 
-	bamsum=bamavg*bamcount;
-
-	bamtotalsum+=bamsum;
 	bamtotalcount+=bamcount;
 	var date = new Date(Number(bamtimestamp));
 	var formattedTime2= date.toString("MMM dd");
 
-	print("<tr height='35px'><td width='15%'>"+bamavg+"</td width='85%'><td>"+formattedTime2+"</td></tr>");
+	print("<tr height='35px'><td width='60%'>"+formattedTime2+"</td><td width='15%'>"+bamcount+"</td><td width='30%'>"+bamavg+"</td></tr>");
 }
 print("</table></td>");
 
@@ -73,7 +70,7 @@ var ceptotalcount=0;
 var ceptotalsum=0;
 
 
-print("<td width='49%'><table width='125%' style='font-size:16px; border-style: solid; border: thin solid';><tr style='font-size:20px; padding:20px;' height='35px' valign='middle'><th>Average</th><th>Timestamp</th><th>Count</th></tr>");
+print("<td width='49%'><table width='125%' style='font-size:16px; border-style: solid; border: thin solid';><tr style='font-size:20px; padding:20px;' height='35px' valign='middle'><th>Timestamp</th><th>Count</th><th>Average</th></tr>");
 
 for(var j = 0; j < resultCount[0].count; j++) {
         cepavg=cepResults[j].average;
@@ -88,11 +85,11 @@ for(var j = 0; j < resultCount[0].count; j++) {
 	var date1 = new Date(Number(ceptimestamp));
 	var formattedTime1= date1.toString("MMM dd");
 
-	print("<tr height='35px'><td width='15%'>"+cepavg+"</td width='65%'><td>"+formattedTime1+"</td><td width='20%'>"+cepcount+"</td></tr>");
+	print("<tr height='35px'><td width='60%'>"+formattedTime1+"</td><td width='15%'>"+cepcount+"</td><td width='30%'>"+cepavg+"</td></tr>");
 }
 print("</table></td></tr></table>");
 
-
+var bamtotalsum=bamcount*bamavg;
 var finalsum=ceptotalsum+bamtotalsum;
 var finalcount=ceptotalcount+bamtotalcount;
 
